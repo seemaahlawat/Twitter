@@ -1,0 +1,31 @@
+<div class="center">
+  <h1>New to Twitter...!!! </h1>
+  <h2>Register Here</h2>
+  <%= form_for(:users, :url => {:action => 'create'}) do |f|%>
+  <table>
+    <tr>
+      <td><%= label_tag(:name) %></td>
+      <td><%= f.text_field :name, placeholder: "name" %></td>
+    </tr>
+    <tr>
+      <td><%= label_tag(:username) %></td>
+      <td><%= f.text_field :username, placeholder: "username" %></td>
+    </tr>
+    <tr>
+      <td><%= label_tag(:email) %></td>
+      <td><%= f.text_field :email, placeholder: "email" %></td>
+    </tr>
+    <tr>
+      <td><%= label_tag(:password) %></td>
+      <td> <%= f.password_field :password, placeholder: "password" %></td>
+    </tr>
+    <tr>
+      <td><%= label_tag(:password_confirmation) %></td>
+      <td><%= f.password_field :password_confirmation, placeholder: "password" %></td>
+    </tr>
+    <tr>
+      <td><%= f.submit "Create Account" %></td>
+    </tr>
+  </table>
+  <% end %>
+</div>

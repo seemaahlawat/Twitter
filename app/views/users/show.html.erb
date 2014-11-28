@@ -1,0 +1,53 @@
+<div id="tweets">
+  <%= link_to("Logout", user_logout_path) %><br>
+  <%= form_tag(:action => 'search', :method => 'get') do %>
+    <p>
+      <%= text_field_tag :search, "", placeholder: "Enter Name" %>
+      <%= submit_tag "Search" %>
+    </p>
+  <% end %>
+  <h1>Your Tweet Profile</h1>
+  <div>
+      Name: <%= @user.name %><br>
+      UserName: @<%= @user.username %><br>
+      Email : <%= @user.email %><br>
+      <p>
+      <li><%= @user.tweets.size %> Tweets</li>
+      <li><%= @user.followers.count %> Followers</li>
+        <ul>
+          <% @user.followers.each do |fol| %>
+          <li><%= fol.name %></li>
+          <% end %>
+        </ul>
+      <li><%= @user.followeds.count %> Followings</li>
+      <ul>
+        <% @user.followeds.each do |fol| %>
+        <li><%= fol.name %></li>
+        <% end %>
+      </ul>
+      <%= link_to("Public Tweets", user_tweet_path)%><br>
+  </div>
+</div>
+
+<div id="createTweet">
+  <h2 id = 'createTweet'>Create a Tweet</h2>
+    <%= form_for @tweet, remote: true do |f| %>
+    <%= f.text_area :content, size: '50x2' %>
+    <%= f.hidden_field :user_id, :value => @user.id%><br>
+    <%= f.submit "Post Tweet!" %>
+    <% end %>
+</div>
+
+<div class="left">
+<h1>Your Tweets</h1>
+  <div id='tweet'>
+    <% @tweets.each do |tweet| %>
+        <div class="tweetWrapper"><hr>
+          @<%= @user.name %><br>
+          -->><%= tweet.content %><br>
+          <%= time_ago_in_words(tweet.created_at) %> ago
+          <%= button_to "Delete", tweet, method: 'delete' %>
+        </div><br>
+    <% end %>
+  </div>
+</div>

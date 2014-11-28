@@ -1,0 +1,22 @@
+<% @page_title = "User Login" %>
+
+<div class="login">
+<h2 id = 'content'>Log In to Twitter</h2>
+	<%= form_tag(:action => 'attempt_login') do %>
+	<table class = 'login'>
+		<tr>
+			<td><%= label_tag(:username) %></td>
+			<td><%= text_field_tag(:username) %></td>
+		</tr >
+		<tr>
+			<td><%= label_tag(:password) %></td>
+			<td><%= password_field_tag(:password) %></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><%= submit_tag("Log In") %></td>
+		</tr>
+	</table>
+	<% end %>
+<p id = "content"> New User..? <%= link_to("Register Here", new_user_path) %></p>
+</div>

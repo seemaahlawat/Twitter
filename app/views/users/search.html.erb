@@ -1,0 +1,33 @@
+<%= link_to("HOME", {:controller => "users", :action => "show", :id => @user.id}) %>
+<div>
+<%@search.each do |s|%>	
+<h2>User Details</h2>	
+<% if @user and s != @user %>
+	<% if @user.following? s %>
+	<%= button_to "UnFollow", controller: 'relationships', action: "unfollow", :id => s.id %>
+	<% else %>
+	<%= button_to "Follow", controller: 'relationships', action: "follow", :id => s.id %>
+	<% end %>
+<% end %>
+	<table>
+		<tr>
+			<td>Name</td>
+			<td><%= s.name %></td>
+		</tr>
+		<tr>
+			<td>Email</td>
+			<td><%= s.email%></td>
+		</tr>
+		<tr>
+			<td>Username</td>
+			<td><%= s.username %></td>
+		</tr>
+	</table><br>
+	<% s.tweets.each do |tweet|%>
+		<div class="tweetWrapper">
+	  	<p class="time"><%= tweet.content %><br>
+	  	<%= time_ago_in_words(tweet.created_at) %></p>
+		</div>
+	<% end %>
+<% end %>
+</div>

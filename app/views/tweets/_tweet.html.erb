@@ -1,0 +1,6 @@
+<div class="tweetWrapper"><hr>
+    @<%= tweet.user.name %><br>
+    -->><%= tweet.content %><br>
+    <%= time_ago_in_words(tweet.created_at) %>
+    <%= button_to "Delete", tweet, method: 'delete' %>
+</div><br>

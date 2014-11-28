@@ -1,0 +1,14 @@
+<%= link_to("HOME", {:controller => "users", :action => "show", :id => @user.id}) %>
+<div>
+  <h1>Public Tweets</h1>
+  <% @tweets.each do |tweet| %><hr>
+    <div>
+      <p><%= tweet.content %> </p>
+      <%= tweet.user.name %>
+      <%= time_ago_in_words(tweet.created_at) %><br>
+      <%= link_to "Like",  like_tweet_path %>
+      <%= link_to "Retweet", tweet %>
+      <%= link_to "Comment", tweet %>
+    </div>
+  <% end %>
+</div>

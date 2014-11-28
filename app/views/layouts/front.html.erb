@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+  	<title>Twitter</title>
+		<%= stylesheet_link_tag('application', :media => 'all') %>
+		<%= javascript_include_tag 'application', media: 'all', 'data-turbolinks-track' => true  %>
+  	<%= csrf_meta_tags %>
+	</head>
+	<body>
+		<div id = "main">
+		<% if !flash[:notice].blank? %>
+			<div class="notice">
+				<%= flash[:notice]%>
+			</div>
+		<% end %>
+			<div id = "content">
+				<%= yield %>
+			</div>
+		</div>
+	</body>
+</html>
