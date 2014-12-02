@@ -15,17 +15,17 @@
       <li><%= @user.tweets.size %> Tweets</li>
       <li><%= @user.followers.count %> Followers</li>
         <ul>
-          <% @user.followers.each do |fol| %>
+        <% @user.followers.each do |fol| %>
           <li><%= fol.name %></li>
-          <% end %>
+        <% end %>
         </ul>
       <li><%= @user.followeds.count %> Followings</li>
-      <ul>
-        <% @user.followeds.each do |fol| %>
-        <li><%= fol.name %></li>
-        <% end %>
-      </ul>
-      <%= link_to("Public Tweets", user_tweet_path)%><br>
+        <ul>
+          <% @user.followeds.each do |fol| %>
+            <li><%= fol.name %></li>
+          <% end %>
+        </ul>
+      <h2><%= link_to("Public Tweets", user_tweet_path)%><br></h2>
   </div>
 </div>
 
@@ -42,11 +42,11 @@
 <h1>Your Tweets</h1>
   <div id='tweet'>
     <% @tweets.each do |tweet| %>
-        <div class="tweetWrapper"><hr>
+        <div class="tweetWrapper" id="<%= tweet.id%>"><hr>
           @<%= @user.name %><br>
           -->><%= tweet.content %><br>
           <%= time_ago_in_words(tweet.created_at) %> ago
-          <%= button_to "Delete", tweet, method: 'delete' %>
+          <%= button_to "Delete", tweet, method: 'delete', remote: true %>
         </div><br>
     <% end %>
   </div>

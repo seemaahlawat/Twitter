@@ -10,11 +10,12 @@ Rails.application.routes.draw do
   root to: 'users#login'
   match ':controller/:action', :via => [:get, :post]
   get 'user/logout', :to => "users#logout"
-  get 'tweet_index', :to => "tweets#index"
+  # get 'tweet_index', :to => "tweets#index"
   get 'user', :to => "users#show"
   get 'user_tweet', :to => "tweets#user_tweet"
-  get 'like_tweet', :to => "tweets#index"
-  
+  get 'like_tweet', :to => "tweets#like_tweet"
+  # get 'search', :to => "users#search"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

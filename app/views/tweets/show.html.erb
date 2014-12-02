@@ -6,9 +6,22 @@
       <p><%= tweet.content %> </p>
       <%= tweet.user.name %>
       <%= time_ago_in_words(tweet.created_at) %><br>
-      <%= link_to "Like",  like_tweet_path %>
-      <%= link_to "Retweet", tweet %>
-      <%= link_to "Comment", tweet %>
+      <%= tweet.like %> <%= link_to "Like", like_tweet_path(id: tweet.id) %>
+      <%= tweet.comments.count %> Comments
+      <br><br>
+      <%= form_for @tweet do |f| %>
+        <%= f.text_field :content, placeholder: "Write a comment..." %>
+        <%= f.hidden_field :parent_id, :value => tweet.id %>
+        <%= f.hidden_field :user_id, :value => @user.id%>
+        <%= f.submit "Comment" %>
+      <% end %>
+      <div>
+      <% tweet.comments.each do |com|%>
+        -->> <%= com.content %><br>
+        by <%= com.user.name %> <%= time_ago_in_words(com.created_at)%> ago<br>
+      <%end%>
+      </div>
+      <br>
     </div>
   <% end %>
 </div>

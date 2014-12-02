@@ -28,4 +28,9 @@
     </tr>
   </table>
   <% end %>
+  <%= link_to("Login Here", root_path) %>
+  <% @user.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  
 </div>

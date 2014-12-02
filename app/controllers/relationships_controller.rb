@@ -24,13 +24,16 @@ class RelationshipsController < ApplicationController
 	def follow
 		@followed = User.find(params[:id])
 		current_user.followeds << @followed
+		redirect_to user_path current_user.id
+		flash[:notice] = "Followed"
 	  # Relationship.create follower_id: current_user.id, followed_id: params[:id]
 	end
 
 	def unfollow
 		@relationship = Relationship.find_by_followed_id(params[:id])
-    @relationship.destroy
+    @relationship.destroy 
+    redirect_to user_path current_user.id
+    flash[:notice] = "UnFollowed"
 	end
-
 	
 end

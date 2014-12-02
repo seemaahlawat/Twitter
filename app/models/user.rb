@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 	
 	has_secure_password
-	has_many :tweets
+	has_many :tweets, -> { where parent_id: nil}
 	
 	has_many :followed_relationships, class_name: "Relationship", foreign_key: "follower_id"
 	has_many :follower_relationships, class_name: "Relationship", foreign_key: "followed_id"
