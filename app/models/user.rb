@@ -1,8 +1,12 @@
 class User < ActiveRecord::Base
 	
 	has_secure_password
+
 	has_many :tweets, -> { where parent_id: nil}
+	has_many :like_tweets
+	has_many :liked_tweets, through: :like_tweets
 	
+
 	has_many :followed_relationships, class_name: "Relationship", foreign_key: "follower_id"
 	has_many :follower_relationships, class_name: "Relationship", foreign_key: "followed_id"
 
@@ -23,6 +27,10 @@ class User < ActiveRecord::Base
   
   def following?(obj)
     self.followeds.include?(obj)
+  end
+
+  def already_like?(obj)
+    self.liked_tweets.include?(obj)
   end
 
 end

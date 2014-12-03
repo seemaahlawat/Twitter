@@ -6,7 +6,11 @@
       <p><%= tweet.content %> </p>
       <%= tweet.user.name %>
       <%= time_ago_in_words(tweet.created_at) %><br>
-      <%= tweet.like %> <%= link_to "Like", like_tweet_path(id: tweet.id) %>
+      <% if @user.already_like? tweet %>
+      <%= button_to "unlike", unlike_path(:id => tweet.id)%>
+      <% else %>
+      <%= button_to "like", like_path(:id => tweet.id)%>
+      <%end %>
       <%= tweet.comments.count %> Comments
       <br><br>
       <%= form_for @tweet do |f| %>

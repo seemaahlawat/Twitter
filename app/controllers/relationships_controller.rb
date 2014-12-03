@@ -1,6 +1,6 @@
 class RelationshipsController < ApplicationController
 	
-	def create
+	def create 
 	  @relationship = Relationship.new
 	  @relationship.followed_id = params[:id]
 	  @relationship.follower_id = current_user.id

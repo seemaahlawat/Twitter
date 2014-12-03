@@ -3,11 +3,11 @@ class TweetsController < ApplicationController
 	before_action :confirm_logged_in 
 	layout 'front'
 
-	def index
-    @tweets = Tweet.all.order("created_at DESC")
-    @tweet = Tweet.new
-    @user = current_user
-	end
+	# def index
+ #    # @tweets = Tweet.all.order("created_at DESC")
+ #    @tweet = Tweet.new
+ #    @user = current_user
+	# end
 
 	def new
 	end
@@ -21,7 +21,7 @@ class TweetsController < ApplicationController
 		flash[:error] = "Please check your tweet....!!!!" unless @tweet.save
 		respond_to do |format|
     	format.js 
-    	format.html 
+    	format.html {redirect_to :controller => 'tweets', :action => 'user_tweet'}
     end
 	end
 
@@ -41,13 +41,7 @@ class TweetsController < ApplicationController
 		@users.each do |x|
 			@tweets.concat(x.tweets)
 		end
-		render 'show'
-	end
-
-	def like_tweet()
-		@tweet = Tweet.find(params[:id])
-		@tweet.like = (@tweet.like || 0) + 1
-		redirect_to user_tweet_path if @tweet.save
+		render 'index'
 	end
 
 	private

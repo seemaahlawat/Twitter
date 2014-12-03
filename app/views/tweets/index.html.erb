@@ -3,12 +3,27 @@
   <h1>Public Tweets</h1>
   <% @tweets.each do |tweet| %><hr>
     <div>
-      <p><%= tweet.content %> </p>
+      <%= tweet.content %><br>
       <%= tweet.user.name %>
       <%= time_ago_in_words(tweet.created_at) %>
-      <%= link_to "Like", tweet, method: '' %>
-      <%= link_to "Retweet", tweet, method: '' %>
-      <%= link_to "Comment", tweet, method: '' %>
+      <% if @user.already_like? tweet %>
+      <%= button_to "unlike", unlike_path(:id => tweet.id)%>
+      <% else %>
+      <%= button_to "like", like_path(:id => tweet.id)%>
+      <%end %>
+      <%= tweet.comments.count %> Comments
+      <br>
+      <%= form_for @tweet do |f| %>
+        <%= f.text_field :content, placeholder: "Write a comment..." %>
+        <%= f.hidden_field :parent_id, :value => tweet.id %>
+        <%= f.hidden_field :user_id, :value => @user.id%>
+        <%= f.submit "Comment" %>
+      <% end %>
+      <% tweet.comments.each do |com|%>
+        -->> <%= com.content %><br>
+        by <%= com.user.name %> <%= time_ago_in_words(com.created_at)%> ago<br>
+      <%end%>
+      <br>
     </div>
   <% end %>
 </div>
