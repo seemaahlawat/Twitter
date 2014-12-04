@@ -3,12 +3,6 @@ class TweetsController < ApplicationController
 	before_action :confirm_logged_in 
 	layout 'front'
 
-	# def index
- #    # @tweets = Tweet.all.order("created_at DESC")
- #    @tweet = Tweet.new
- #    @user = current_user
-	# end
-
 	def new
 	end
 	
@@ -21,7 +15,7 @@ class TweetsController < ApplicationController
 		flash[:error] = "Please check your tweet....!!!!" unless @tweet.save
 		respond_to do |format|
     	format.js 
-    	format.html {redirect_to :controller => 'tweets', :action => 'user_tweet'}
+    	format.html {redirect_to tweet_index_path }
     end
 	end
 

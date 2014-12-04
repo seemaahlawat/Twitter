@@ -1,5 +1,6 @@
 class LikeTweetsController < ApplicationController
 
+	layout 'front'
 	def create
 		@like = LikeTweet.new
 		@like.user_id = current_user.id
@@ -23,13 +24,13 @@ class LikeTweetsController < ApplicationController
 
 	def like_tweet
 		LikeTweet.create user_id: current_user.id, tweet_id: params[:id]
-		redirect_to user_path current_user.id
+		redirect_to tweet_index_path
 	end
 
 	def unlike
 		@like = LikeTweet.find_by_tweet_id(params[:id])
 		@like.destroy
-		redirect_to user_path current_user.id
+		redirect_to tweet_index_path
 	end
 	
 	private
