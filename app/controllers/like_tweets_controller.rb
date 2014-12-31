@@ -4,7 +4,7 @@ class LikeTweetsController < ApplicationController
 	def create
 		@like = LikeTweet.new
 		@like.user_id = current_user.id
-		@like.tweet_id = 
+		#@like.tweet_id = 
 
 		if @like.save
 			respond_to do |format|
@@ -12,7 +12,7 @@ class LikeTweetsController < ApplicationController
 				format.js
 			end
 		else
-			flash[:error] = "Can't Like"
+			flash[:error] = "already Liked"
 		end
 	end
 

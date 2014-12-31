@@ -7,6 +7,8 @@ class TweetsController < ApplicationController
 	end
 	
 	def show
+		@tweets = Tweet.all #find(params[:id])
+		@cnt = @tweets.count
 	end
 
 	def create

@@ -20,10 +20,6 @@ a.action:hover { background: #B6D491; }
 
 .index table { clear: both; width: 100%; }
 .index table tr td {border: 1px solid #666666; }
-/*.login table { clear: both; width: 100%; }
-.login table tr td {border: 1px solid #666666; }
-.login table { clear: both; margin: 0 200px; width: 300px; }
-/*.login table.wide { width: 600px; margin: 0 50px; }*/
 .login table tr th { white-space: nowrap; padding-right: 5px; }
 .login table tr td { border: 1px solid #666666; }
 .edit table, .new table { margin: 0 auto; }

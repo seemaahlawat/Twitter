@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 	
-	has_secure_password
+	# has_secure_password
 
 	has_many :tweets, -> { where parent_id: nil}
 	has_many :like_tweets
@@ -15,10 +15,22 @@ class User < ActiveRecord::Base
 
 	EMAIL_REGEX = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\Z/i
 
-	validates :name, presence: true
-	validates :username, uniqueness: true, presence: true
-	validates :email, uniqueness: true, presence: true, :format => EMAIL_REGEX
- 	validates :password, length: { minimum: 6 }
+	  validates :name, presence: true
+		validates :username, uniqueness: true, presence: true
+		validates :email, uniqueness: true, presence: true, :format => EMAIL_REGEX
+ 	# validates :password, length: { minimum: 6 }
+
+	def self.create_with_omniauth(auth)
+	  create! do |user|
+	    user.provider = auth["provider"]
+	    user.uid = auth["uid"]
+	    user.name = auth["info"]["name"]
+	    user.password = auth["info"]["password"]
+	    user.email = auth["info"]["email"]
+	    @username = user.name.split(' ').join('.')
+	    user.username = @username
+	  end
+	end
 
 	def self.search(search)
   	condition = "%" + search + "%"

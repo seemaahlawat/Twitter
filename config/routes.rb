@@ -11,10 +11,11 @@ Rails.application.routes.draw do
 
   root to: 'users#login'
   match ':controller/:action', :via => [:get, :post]
+  
+  match "/auth/google_oauth2/callback" => "sessions#create", via: [:get, :post]
+  
   get 'user/logout', :to => "users#logout"
   get 'tweet_index', :to => "tweets#user_tweet"
-  get 'user', :to => "users#show"
-  # get 'user_tweet', :to => "tweets#user_tweet"
   get 'like_tweet', :to => "tweets#like_tweet"
   post 'like', :to => "like_tweets#like_tweet"
   post 'unlike', :to => "like_tweets#unlike"
